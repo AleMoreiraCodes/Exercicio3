@@ -4,6 +4,7 @@ public class PedidoEstadoRecebido extends PedidoEstado {
 
     private PedidoEstadoRecebido() {};
     private static PedidoEstadoRecebido instance = new PedidoEstadoRecebido();
+
     public static PedidoEstadoRecebido getInstance() {
         return instance;
     }
@@ -12,13 +13,19 @@ public class PedidoEstadoRecebido extends PedidoEstado {
         return "Pedido recebido.";
     }
 
+    @Override
+    public boolean receber(Pedido pedido) {
+        pedido.setEstado(PedidoEstadoRecebido.getInstance());
+        return true;
+    }
+
     public boolean preparar(Pedido pedido) {
-        pedido.setEstado(PedidoEstadoEntregue.getInstance());
+        pedido.setEstado(PedidoEstadoPreparado.getInstance());
         return true;
     }
 
     public boolean entregar(Pedido pedido) {
-        pedido.setEstado(PedidoEstadoPreparado.getInstance());
+        pedido.setEstado(PedidoEstadoEntregue.getInstance());
         return true;
     }
 

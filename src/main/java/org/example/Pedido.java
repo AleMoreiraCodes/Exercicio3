@@ -1,6 +1,8 @@
 package org.example;
 
-public class Pedido {
+import java.util.Observable;
+
+public class Pedido extends Observable {
 
     private String descricao;
     private String iten;
@@ -8,10 +10,14 @@ public class Pedido {
 
     public Pedido() {
         this.estado = PedidoEstadoRecebido.getInstance();
+        setChanged();
+        notifyObservers();
     }
 
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
+        setChanged();
+        notifyObservers();
     }
 
     public boolean receber() {
